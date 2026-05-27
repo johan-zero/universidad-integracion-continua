@@ -1,0 +1,31 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Variables locales
+.env
+.env.*
+
+# Dependencias temporales
+node_modules/
+__pycache__/
+
+# Archivos generados
+dist/
+build/
+coverage/
+
+# Evidencias pesadas locales
+*.mp4
+*.mov
+*.zip
