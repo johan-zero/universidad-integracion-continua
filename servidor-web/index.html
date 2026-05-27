@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrega 1 - Integración Continua</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      color: #1f2933;
+    }
+    main {
+      max-width: 860px;
+      margin: 48px auto;
+      padding: 32px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+    }
+    h1 {
+      margin-top: 0;
+      color: #0f172a;
+    }
+    .status {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #dcfce7;
+      color: #166534;
+      font-weight: bold;
+    }
+    code {
+      background: #e5e7eb;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="status">Servidor web activo</p>
+    <h1>Entrega 1 - Integración Continua</h1>
+    <p>Este contenedor ejecuta un servidor Nginx y permite validar la comunicación con un segundo contenedor de pruebas.</p>
+    <p>La comunicación interna se realiza mediante la red Docker Compose y el nombre del servicio <code>servidor-web</code>.</p>
+    <p>Resultado esperado: el contenedor <code>cliente-pruebas</code> debe poder conectarse a este servidor mediante <code>ping</code> y <code>curl</code>.</p>
+  </main>
+</body>
+</html>
