@@ -1,0 +1,30 @@
+services:
+  servidor-web:
+    build:
+      context: ./servidor-web
+    container_name: entrega1-servidor-web
+    ports:
+      - "8080:80"
+    networks:
+      - red-integracion
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  cliente-pruebas:
+    build:
+      context: ./cliente-pruebas
+    container_name: entrega1-cliente-pruebas
+    depends_on:
+      servidor-web:
+        condition: service_healthy
+    networks:
+      - red-integracion
+    tty: true
+
+networks:
+  red-integracion:
+    driver: bridge
