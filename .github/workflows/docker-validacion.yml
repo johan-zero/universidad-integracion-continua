@@ -1,0 +1,33 @@
+name: Validacion Docker Entrega 1
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validar-docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Construir servicios
+        run: docker compose build
+
+      - name: Iniciar servicios
+        run: docker compose up -d
+
+      - name: Verificar contenedores
+        run: docker compose ps
+
+      - name: Validar comunicacion entre contenedores
+        run: docker compose exec -T cliente-pruebas validar_comunicacion.sh
+
+      - name: Detener servicios
+        if: always()
+        run: docker compose down
