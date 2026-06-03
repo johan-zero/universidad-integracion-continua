@@ -2,6 +2,8 @@
 
 Repositorio académico para la **Entrega 1** del módulo **Énfasis Profesional I - Integración Continua**.
 
+> **Control de alcance:** este repositorio corresponde exclusivamente a la materia de Integración Continua. El contenido, la documentación y las evidencias están orientados a GitHub, Docker y comunicación entre contenedores.
+
 ## Descripción del proyecto
 
 El objetivo de esta entrega es crear un proyecto de software alojado en GitHub y configurar un ambiente con Docker compuesto por **dos contenedores comunicados entre sí**.
