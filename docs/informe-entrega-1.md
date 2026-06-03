@@ -1,5 +1,9 @@
 # Informe Entrega 1 - Proyecto de software basado en herramientas de integracion continua
 
+## Control de alcance academico
+
+Este documento corresponde exclusivamente a la materia Enfasis Profesional I - Integracion Continua. El repositorio, los archivos, los comandos y las evidencias se relacionan con GitHub, Docker, Docker Compose y comunicacion entre contenedores. No corresponde a una entrega de programacion movil ni debe mezclarse con actividades de diseno o desarrollo de aplicaciones moviles.
+
 ## 1. Introduccion
 
 La presente entrega corresponde al primer avance del proyecto del modulo Integracion Continua. El objetivo principal es crear un proyecto de software alojado en GitHub y configurar un ambiente inicial basado en Docker, compuesto por dos contenedores comunicados entre si.
@@ -128,13 +132,11 @@ http://localhost:8080
 
 | Evidencia | Descripcion | Estado |
 |---|---|---|
-| Captura 1 | Repositorio publicado en GitHub. | Pendiente de insertar en documento final. |
-| Captura 2 | Estructura de archivos del repositorio. | Pendiente de insertar en documento final. |
-| Captura 3 | Ejecucion de `docker compose build`. | Pendiente de ejecutar localmente. |
-| Captura 4 | Ejecucion de `docker compose up -d`. | Pendiente de ejecutar localmente. |
-| Captura 5 | Resultado de `docker compose ps`. | Pendiente de ejecutar localmente. |
-| Captura 6 | Resultado de `docker compose exec cliente-pruebas validar_comunicacion.sh`. | Pendiente de ejecutar localmente. |
-| Captura 7 | Navegador mostrando `http://localhost:8080`. | Pendiente de ejecutar localmente. |
+| Captura 1 | Repositorio publicado en GitHub. | Documentada. |
+| Captura 2 | Estructura de archivos del repositorio. | Documentada. |
+| Captura 3 | Configuracion `docker-compose.yml`. | Documentada. |
+| Captura 4 | Dockerfiles y script de validacion. | Documentada. |
+| Captura 5 | Comandos de ejecucion local Docker. | Secuencia documentada. |
 
 ## 11. Resultados esperados
 
