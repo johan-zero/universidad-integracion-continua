@@ -2,7 +2,7 @@
 
 ## Control de alcance academico
 
-Este documento corresponde exclusivamente a la materia Enfasis Profesional I - Integracion Continua. El repositorio, los archivos, los comandos y las evidencias se relacionan con GitHub, Docker, Docker Compose y comunicacion entre contenedores. No corresponde a una entrega de programacion movil ni debe mezclarse con actividades de diseno o desarrollo de aplicaciones moviles.
+Este documento corresponde exclusivamente a la materia Enfasis Profesional I - Integracion Continua. El repositorio, los archivos, los comandos y las evidencias se relacionan con GitHub, Docker, Docker Compose y comunicacion entre contenedores. No corresponde a entregas de otras asignaturas ni debe mezclarse con actividades externas al alcance definido para esta materia.
 
 ## 1. Introduccion
 
