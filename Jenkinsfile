@@ -5,6 +5,8 @@ pipeline {
         stage('Validar repositorio') {
             steps {
                 echo 'Repositorio disponible para validacion.'
+                sh 'pwd'
+                sh 'ls -la'
             }
         }
 
@@ -29,11 +31,14 @@ pipeline {
     }
 
     post {
+        always {
+            sh 'docker compose down || true'
+        }
         success {
-            echo 'Validacion finalizada correctamente.'
+            echo 'Pipeline finalizado correctamente. Los contenedores fueron construidos y la comunicacion fue validada.'
         }
         failure {
-            echo 'Validacion fallida. Revisar la salida de consola.'
+            echo 'Pipeline fallido. Revisar la salida de consola en Jenkins.'
         }
     }
 }
