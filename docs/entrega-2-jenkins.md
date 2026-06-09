@@ -1,131 +1,130 @@
 # Entrega 2 - Integracion Continua con Jenkins
 
-## Control de alcance academico
+## Proposito
 
-Este documento corresponde exclusivamente a la materia Enfasis Profesional I - Integracion Continua. La Entrega 2 da continuidad al repositorio y al ambiente Docker construido en la Entrega 1, incorporando Jenkins como herramienta de automatizacion y gestion de operaciones.
+Esta entrega documenta la incorporacion de Jenkins al proyecto de Integracion Continua. El entregable se presenta como una unidad independiente: contiene su objetivo, arquitectura, implementacion, comandos, evidencias y criterios de validacion. Sin embargo, conserva la trazabilidad tecnica de la Entrega 1, donde ya se habia construido el repositorio GitHub y el ambiente Docker con servicios comunicados entre si.
 
-## 1. Proposito de la entrega
+## Alcance funcional
 
-El objetivo de esta entrega es instalar, configurar y explorar Jenkins, creando una tarea de automatizacion que permita ejecutar un flujo basico de integracion continua sobre el proyecto existente.
+La Entrega 2 implementa Jenkins como gestor de automatizacion para ejecutar un flujo basico de integracion continua sobre el proyecto existente. La solucion no reemplaza los contenedores de la Entrega 1; los toma como base verificable y agrega una capa de orquestacion mediante pipeline.
 
-El flujo propuesto conserva el trabajo anterior: repositorio GitHub, contenedores Docker y validacion de comunicacion entre servicios. Jenkins se incorpora como gestor de operaciones para ejecutar de forma ordenada las etapas de validacion del proyecto.
+El alcance queda definido en cuatro resultados:
 
-## 2. Relacion con el feedback del profesor
+1. Despliegue de Jenkins en Docker.
+2. Publicacion de un `Jenkinsfile` versionado en GitHub.
+3. Definicion de etapas de pipeline para construir, iniciar y validar el ambiente Docker.
+4. Documentacion de la arquitectura y del procedimiento de ejecucion.
 
-De acuerdo con las sesiones sincronicas, el profesor indico que la actividad no debe quedarse solo en una explicacion teorica. Es necesario instalar Jenkins, explorar la herramienta, revisar los plugins, crear una tarea y evidenciar como la herramienta se integra con el proyecto.
+## Alineacion con las sesiones del profesor
 
-Tambien se recordo que el proyecto final sera un consolidado de lo construido durante el modulo: GitHub, Docker, contenedores y Jenkins. Por este motivo, los archivos de la Entrega 1 se conservan y la Entrega 2 se construye sobre el mismo repositorio.
+En la sesion del 25 de mayo se indico que Jenkins debia instalarse, configurarse y explorarse como herramienta, incluyendo plugins, usuario inicial y creacion de tareas. En la sesion del 8 de junio se reforzo que el proyecto debe integrar progresivamente GitHub, Docker, Jenkins y las demas herramientas del modulo, conservando lo construido porque el cierre del curso consolida todo el proceso.
 
-## 3. Componentes agregados al repositorio
+## Arquitectura propuesta
 
-| Archivo | Proposito |
-|---|---|
-| `docker-compose.jenkins.yml` | Permite levantar Jenkins en un contenedor Docker conectado a la red del proyecto. |
-| `Jenkinsfile` | Define el pipeline de Jenkins para construir contenedores, iniciar el ambiente y validar comunicacion. |
-| `docs/entrega-2-jenkins.md` | Documento tecnico de la Entrega 2. |
+La solucion queda organizada en tres capas:
 
-## 4. Arquitectura de la solucion
-
-La solucion queda organizada de la siguiente forma:
+| Capa | Componente | Funcion |
+|---|---|---|
+| Repositorio | GitHub | Aloja el codigo, la documentacion y el `Jenkinsfile`. |
+| Automatizacion | Jenkins | Ejecuta el pipeline de validacion. |
+| Contenedores | Docker Compose | Construye los servicios y valida su comunicacion interna. |
 
 ```text
-GitHub Repository
-   |
-   |-- docker-compose.yml
-   |      |-- servidor-web
-   |      |-- cliente-pruebas
-   |
-   |-- docker-compose.jenkins.yml
-   |      |-- jenkins
-   |
-   |-- Jenkinsfile
-          |-- validar repositorio
-          |-- construir contenedores
-          |-- iniciar ambiente
-          |-- validar comunicacion
+Usuario / Profesor
+      |
+      v
+Repositorio GitHub
+      |-- Jenkinsfile
+      |-- docker-compose.yml
+      |-- docker-compose.jenkins.yml
+      |
+      v
+Jenkins Pipeline
+      |-- Validar repositorio
+      |-- Construir contenedores
+      |-- Iniciar ambiente
+      |-- Validar comunicacion
+      |
+      v
+Docker Compose
+      |-- servidor-web
+      |-- cliente-pruebas
+      |-- red-integracion
 ```
 
-## 5. Ejecucion de Jenkins
+## Implementacion realizada
 
-Antes de iniciar Jenkins, se debe crear o levantar la red del proyecto. El archivo `docker-compose.yml` ya define la red con nombre `red-integracion`.
+### Jenkins en Docker
 
-### 5.1. Construir y levantar el ambiente base
+Se agrego `docker-compose.jenkins.yml` para ejecutar Jenkins como contenedor. El servicio publica Jenkins en el puerto local `9090`, evitando conflicto con el servidor web de la Entrega 1 que usa `8080`. Jenkins se conecta a la red `red-integracion`, lo que permite mantener coherencia con el ambiente Docker ya definido.
+
+### Pipeline en Jenkinsfile
+
+Se agrego un `Jenkinsfile` declarativo en la raiz del repositorio. Esta decision es consistente con la practica recomendada por Jenkins: versionar el pipeline en control de codigo para mantener trazabilidad, revision y una fuente unica de verdad del flujo de automatizacion.
+
+Las etapas definidas son:
+
+| Etapa | Comando principal | Resultado esperado |
+|---|---|---|
+| Validar repositorio | `pwd`, `ls -la` | Confirmar que Jenkins trabaja sobre el proyecto. |
+| Construir contenedores | `docker compose build` | Construir las imagenes Docker. |
+| Iniciar ambiente | `docker compose up -d` | Levantar los servicios definidos. |
+| Validar comunicacion | `docker compose exec -T cliente-pruebas validar_comunicacion.sh` | Comprobar comunicacion entre contenedores. |
+
+## Procedimiento de ejecucion
+
+Desde la raiz del repositorio:
 
 ```bash
 docker compose up -d
 ```
 
-### 5.2. Levantar Jenkins
+Luego iniciar Jenkins:
 
 ```bash
 docker compose -f docker-compose.jenkins.yml up -d
 ```
 
-### 5.3. Consultar la contrasena inicial de Jenkins
+Consultar la contrasena inicial:
 
 ```bash
 docker exec entrega2-jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 
-### 5.4. Abrir Jenkins en el navegador
+Abrir Jenkins:
 
 ```text
 http://localhost:9090
 ```
 
-## 6. Configuracion inicial de Jenkins
+Crear una tarea tipo Pipeline, asociarla al repositorio GitHub y usar el archivo `Jenkinsfile` como definicion del flujo.
 
-El proceso esperado es:
+## Evidencias requeridas
 
-1. Ingresar a `http://localhost:9090`.
-2. Copiar la contrasena inicial generada por Jenkins.
-3. Seleccionar la instalacion de plugins sugeridos.
-4. Crear el usuario administrador.
-5. Confirmar la URL de Jenkins.
-6. Crear una nueva tarea tipo Pipeline.
-7. Asociar el pipeline al repositorio GitHub.
-8. Ejecutar el pipeline y revisar la salida de consola.
-
-## 7. Pipeline propuesto
-
-El archivo `Jenkinsfile` define las siguientes etapas:
-
-| Etapa | Descripcion |
-|---|---|
-| Validar repositorio | Confirma que Jenkins puede acceder al proyecto. |
-| Construir contenedores Docker | Ejecuta `docker compose build`. |
-| Iniciar ambiente Docker | Ejecuta `docker compose up -d` y `docker compose ps`. |
-| Validar comunicacion | Ejecuta el script de validacion entre contenedores. |
-
-## 8. Evidencias esperadas
-
-Para documentar correctamente la Entrega 2 se deben incluir capturas de:
+El documento final debe evidenciar:
 
 1. Repositorio GitHub con `Jenkinsfile` y `docker-compose.jenkins.yml`.
-2. Jenkins ejecutando en `http://localhost:9090`.
-3. Pantalla de instalacion de plugins sugeridos.
-4. Creacion del usuario administrador.
-5. Creacion de una tarea tipo Pipeline.
-6. Configuracion del pipeline apuntando al repositorio GitHub.
-7. Ejecucion del pipeline.
-8. Consola de Jenkins con las etapas ejecutadas.
-9. Resultado de validacion de comunicacion entre contenedores.
+2. Arquitectura de la solucion Jenkins + GitHub + Docker.
+3. Definicion del servicio Jenkins en Docker Compose.
+4. Etapas declaradas en el `Jenkinsfile`.
+5. Comandos de ejecucion de Jenkins.
+6. Resultado esperado del pipeline.
 
-## 9. Criterios de calidad aplicados
+## Justificacion tecnica
 
-Aunque la rubrica cargada corresponde a otro contexto academico, se toma como criterio transversal la necesidad de documentar con claridad: instalacion, configuracion, conectividad, evidencias y organizacion del documento.
+Docker Compose permite declarar servicios y sus parametros de ejecucion en archivos YAML. Las redes de Compose permiten que los servicios se comuniquen entre si y sean localizables por nombre de servicio. Jenkins, por su parte, permite definir pipelines versionados en un `Jenkinsfile`, lo cual aporta trazabilidad, revision y consistencia del flujo de integracion continua.
 
-Para esta entrega se aplican los siguientes criterios:
+## Conclusiones
 
-- Evidencias claras y legibles.
-- Separacion entre teoria, procedimiento y resultados.
-- Relacion directa con GitHub, Docker y Jenkins.
-- Reutilizacion del proyecto construido en la Entrega 1.
-- Documentacion suficiente para replicar la instalacion.
+- La Entrega 2 incorpora Jenkins sin perder la base tecnica creada en la Entrega 1.
+- La arquitectura separa correctamente repositorio, automatizacion y contenedores.
+- El pipeline propuesto permite validar de forma automatizada la construccion y comunicacion de los servicios Docker.
+- La documentacion queda preparada para la sustentacion final, donde se debera explicar el recorrido GitHub - Docker - Jenkins.
 
-## 10. Conclusiones
+## Referencias
 
-- Jenkins permite automatizar el proceso de construccion y validacion del proyecto.
-- La Entrega 2 amplija la Entrega 1 sin reemplazarla, manteniendo la trazabilidad del modulo.
-- El pipeline documentado permite validar la construccion de contenedores y la comunicacion entre servicios.
-- La integracion de GitHub, Docker y Jenkins fortalece el flujo de integracion continua solicitado para el proyecto.
+- Docker. (s. f.). Compose file reference: Services. https://docs.docker.com/reference/compose-file/services/
+- Docker. (s. f.). Compose file reference: Networks. https://docs.docker.com/reference/compose-file/networks/
+- Jenkins. (s. f.). Using a Jenkinsfile. https://www.jenkins.io/doc/book/pipeline/jenkinsfile/
+- Jenkins. (s. f.). Installing Jenkins using Docker. https://www.jenkins.io/doc/book/installing/docker/
+- GitHub Docs. (s. f.). About READMEs. https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes
