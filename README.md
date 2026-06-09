@@ -1,26 +1,28 @@
-# Universidad - Integración Continua
+# Universidad - Integracion Continua
 
-Repositorio académico para la **Entrega 1** del módulo **Énfasis Profesional I - Integración Continua**.
+Repositorio academico del modulo **Enfasis Profesional I - Integracion Continua**.
 
-> **Control de alcance:** este repositorio corresponde exclusivamente a la materia de Integración Continua. El contenido, la documentación y las evidencias están orientados a GitHub, Docker y comunicación entre contenedores.
+> **Control de alcance:** este repositorio corresponde exclusivamente a la materia de Integracion Continua. El contenido, la documentacion y las evidencias estan orientados a GitHub, Docker, Jenkins y comunicacion entre herramientas del flujo CI.
 
-## Descripción del proyecto
+## Descripcion del proyecto
 
-El objetivo de esta entrega es crear un proyecto de software alojado en GitHub y configurar un ambiente con Docker compuesto por **dos contenedores comunicados entre sí**.
+El proyecto se desarrolla por entregas incrementales. La Entrega 1 incorporo GitHub y Docker para crear dos contenedores comunicados entre si. La Entrega 2 incorpora Jenkins como gestor de operaciones para automatizar la validacion del ambiente Docker.
 
-La solución implementada usa Docker Compose para levantar los siguientes servicios:
+## Componentes implementados
 
-| Servicio | Contenedor | Descripción |
+| Entrega | Herramienta principal | Resultado tecnico |
 |---|---|---|
-| `servidor-web` | `entrega1-servidor-web` | Servidor Nginx que publica una página HTML simple en el puerto `8080`. |
-| `cliente-pruebas` | `entrega1-cliente-pruebas` | Contenedor Alpine usado para validar la comunicación con el servidor mediante `ping` y `curl`. |
+| Entrega 1 | GitHub + Docker | Repositorio, dos contenedores y red Docker compartida. |
+| Entrega 2 | Jenkins | Pipeline para construir contenedores y validar comunicacion. |
 
 ## Estructura del repositorio
 
 ```text
 .
 ├── README.md
+├── Jenkinsfile
 ├── docker-compose.yml
+├── docker-compose.jenkins.yml
 ├── .gitignore
 ├── servidor-web/
 │   ├── Dockerfile
@@ -34,73 +36,53 @@ La solución implementada usa Docker Compose para levantar los siguientes servic
 │   ├── informe-entrega-1.md
 │   ├── comandos-validacion.md
 │   ├── bitacora-trabajo.md
-│   └── evidencias/
-│       └── README.md
+│   ├── evidencias/
+│   │   └── README.md
+│   └── entrega-2/
+│       ├── README.md
+│       └── guia-instalacion-jenkins.md
 └── .github/
     └── workflows/
         └── docker-validacion.yml
 ```
 
-## Requisitos previos
-
-Para ejecutar el proyecto se requiere tener instalado:
-
-- Docker Desktop.
-- Git.
-- GitHub Desktop o terminal Git.
-
-## Ejecución del proyecto
-
-Desde la raíz del repositorio, ejecutar:
+## Ejecucion Entrega 1 - Docker
 
 ```bash
 docker compose build
-```
-
-Luego iniciar los contenedores:
-
-```bash
 docker compose up -d
-```
-
-Verificar que los contenedores estén activos:
-
-```bash
 docker compose ps
-```
-
-Validar la comunicación entre contenedores:
-
-```bash
 docker compose exec cliente-pruebas validar_comunicacion.sh
 ```
 
-Abrir la aplicación web en el navegador:
+El servicio web queda disponible en:
 
 ```text
 http://localhost:8080
 ```
 
-## Resultado esperado
+## Ejecucion Entrega 2 - Jenkins
 
-La prueba debe confirmar que el contenedor `cliente-pruebas` logra comunicarse con el contenedor `servidor-web` usando el nombre del servicio dentro de la red Docker.
-
-## Limpieza del ambiente
-
-Para detener y eliminar los contenedores creados:
+Primero iniciar el ambiente base de Docker:
 
 ```bash
-docker compose down
+docker compose up -d
 ```
 
-## Alcance de la Entrega 1
+Luego iniciar Jenkins:
 
-Esta primera entrega se centra en:
+```bash
+docker compose -f docker-compose.jenkins.yml up -d
+```
 
-1. Creación del proyecto en GitHub.
-2. Configuración de Docker.
-3. Construcción de dos contenedores.
-4. Comunicación entre los contenedores.
-5. Documentación de evidencias técnicas.
+Jenkins queda disponible en:
 
-Las herramientas Jenkins, Travis CI y Codeship corresponden a las siguientes entregas del módulo.
+```text
+http://localhost:9090
+```
+
+El pipeline se define en el archivo `Jenkinsfile` y ejecuta las etapas de validacion del repositorio, construccion de contenedores, inicio del ambiente y validacion de comunicacion.
+
+## Resultado esperado
+
+La Entrega 2 debe demostrar que Jenkins puede ejecutar un flujo basico de integracion continua sobre el proyecto ya construido en la Entrega 1, conservando el caracter incremental del modulo.
