@@ -27,4 +27,5 @@ services:
 
 networks:
   red-integracion:
+    name: red-integracion
     driver: bridge
