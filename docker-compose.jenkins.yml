@@ -1,0 +1,22 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:lts-jdk17
+    container_name: entrega2-jenkins
+    user: root
+    ports:
+      - "9090:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./:/workspace
+    networks:
+      - red-integracion
+    restart: unless-stopped
+
+volumes:
+  jenkins_home:
+
+networks:
+  red-integracion:
+    external: true
