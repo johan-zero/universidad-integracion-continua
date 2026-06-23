@@ -1,0 +1,30 @@
+language: generic
+os: linux
+dist: focal
+
+branches:
+  only:
+    - main
+
+services:
+  - docker
+
+script:
+  - |
+    if docker compose version >/dev/null 2>&1; then
+      DC="docker compose"
+    else
+      DC="docker-compose"
+    fi
+    $DC build
+    $DC up -d
+    $DC ps
+    $DC exec -T cliente-pruebas validar_comunicacion.sh
+
+after_script:
+  - |
+    if docker compose version >/dev/null 2>&1; then
+      docker compose down
+    else
+      docker-compose down
+    fi
