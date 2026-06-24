@@ -1,16 +1,10 @@
-# Roles, trazabilidad y decisiones del equipo
+# Responsabilidad individual, trazabilidad y decisiones
 
-> Completar los nombres reales de los integrantes antes de la entrega y la grabación.
+## Responsable del proyecto
 
-## Responsabilidades
-
-| Integrante | Rol asignado | Aporte verificable |
+| Estudiante | Responsabilidad asumida | Aporte verificable |
 |---|---|---|
-| Johan Sebastian Rodríguez | Integración y documentación técnica | Repositorio, Docker, Jenkins, Travis CI y documento final. |
-| [Integrante 2] | Ejecución Docker | Validación de contenedores y capturas de comunicación. |
-| [Integrante 3] | Configuración Jenkins | Dashboard, plugins, pipeline y consola de ejecución. |
-| [Integrante 4] | Configuración Travis CI | Activación del repositorio, build y captura de logs. |
-| [Integrante 5] | Evidencias y sustentación | Consolidación de figuras, revisión de APA y participación en video. |
+| Johan Sebastian Rodríguez | Diseño, integración, ejecución, documentación y sustentación individual | Repositorio público, Docker, Jenkins, Travis CI, evidencias, informe final e instructivo de sustentación. |
 
 ## Trazabilidad de implementaciones
 
@@ -20,7 +14,7 @@
 | Entrega 2 | Agregar Jenkins y pipeline versionado. | Automatizar la construcción y la prueba definida en la Entrega 1. | `Jenkinsfile` y `docker-compose.jenkins.yml`. |
 | Retroalimentación Entrega 2 | Documentar requisitos de Jenkins con mayor profundidad. | Corregir la observación sobre características y requisitos de implementación. | `jenkins/Dockerfile`, `plugins.txt` y documento final. |
 | Entrega final | Agregar Travis CI mediante `.travis.yml`. | Responder al requisito de integración remota con GitHub. | `.travis.yml`. |
-| Entrega final | Diferenciar configuración y ejecución comprobada. | Evitar afirmar resultados que no puedan verificarse en consola o dashboard. | Matriz de evidencias y video. |
+| Entrega final | Diferenciar configuración y ejecución comprobada. | Evitar afirmar resultados que no puedan verificarse en consola o dashboard. | Matriz de evidencias y sustentación individual. |
 
 ## Incidencias y tratamiento
 
@@ -31,6 +25,6 @@
 | Conflicto entre interfaz Jenkins y servidor web. | Puertos diferenciados: 9090 para Jenkins y 8080 para Nginx. |
 | Falta de evidencia de CodeShip. | No declararlo integrado hasta contar con acceso, repositorio vinculado y build verificable. |
 
-## Opiniones del equipo
+## Reflexión individual
 
-Cada integrante debe completar una reflexión breve y personal sobre su participación, la herramienta trabajada y el principal aprendizaje obtenido. Evitar textos idénticos entre integrantes.
+La implementación permitió consolidar un flujo de integración continua en el que cada herramienta cumple una responsabilidad específica. GitHub conserva la trazabilidad; Docker asegura un entorno reproducible; Jenkins automatiza la validación local; y Travis CI extiende la validación al repositorio remoto. El principal aprendizaje fue la importancia de diferenciar entre una configuración técnica versionada y una ejecución realmente comprobada mediante evidencia visible.
