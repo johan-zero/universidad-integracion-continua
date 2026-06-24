@@ -1,7 +1,7 @@
 FROM alpine:3.20
 
-LABEL maintainer="Grupo Integración Continua"
-LABEL description="Cliente de pruebas para validar comunicación con el servidor web"
+LABEL maintainer="Johan Sebastian Rodriguez"
+LABEL description="Cliente de pruebas del proyecto final para validar comunicacion con el servidor web"
 
 RUN apk add --no-cache curl iputils
 
