@@ -1,10 +1,12 @@
 # Entrega final — Integración Continua
 
+**Estudiante:** Johan Sebastian Rodríguez
+
 ## Resumen ejecutivo
 
-Este proyecto consolida la implementación progresiva de un flujo de integración continua para un servicio web simple. La solución utiliza GitHub como repositorio y mecanismo de trazabilidad, Docker Compose para construir y ejecutar servicios aislados, Jenkins como gestor de operaciones local y Travis CI como configuración de validación remota ante cambios en la rama principal.
+Este proyecto consolida la implementación individual de un flujo de integración continua para un servicio web simple. La solución utiliza GitHub como repositorio y mecanismo de trazabilidad, Docker Compose para construir y ejecutar servicios aislados, Jenkins como gestor de operaciones local y Travis CI como configuración de validación remota ante cambios en la rama principal.
 
-La entrega final preserva las evidencias técnicas de las etapas anteriores y responde a la retroalimentación de la segunda entrega mediante una especificación más completa de los requisitos de Jenkins, la documentación del pipeline y una matriz de evidencias para la sustentación.
+La entrega final preserva las evidencias técnicas de las etapas anteriores y responde a la retroalimentación de la segunda entrega mediante una especificación más completa de los requisitos de Jenkins, la documentación del pipeline y una matriz de evidencias para la sustentación individual.
 
 ## 1. Objetivo
 
@@ -14,7 +16,7 @@ Demostrar un flujo integrado de control de cambios, construcción, ejecución y 
 
 ```mermaid
 flowchart TB
-    U[Equipo de trabajo] --> G[GitHub
+    U[Johan Sebastian Rodríguez] --> G[GitHub
 Código, documentación y commits]
     G --> J[Jenkins
 Pipeline versionado]
@@ -49,10 +51,10 @@ La instalación de Jenkins se define como contenedor para mantener un entorno re
 | Requisito | Justificación |
 |---|---|
 | Docker Desktop en modo Linux Containers | Ejecuta el ambiente de servicios y el contenedor de Jenkins. |
-| 4 GB de RAM y 50 GB de almacenamiento recomendados | Base de capacidad para un controlador Jenkins de equipo pequeño. |
+| 4 GB de RAM y 50 GB de almacenamiento recomendados | Base de capacidad para un entorno individual de baja escala. |
 | Puerto 9090 | Expone la interfaz de Jenkins sin colisionar con el puerto 8080 del servidor web. |
 | Puerto 50000 | Reserva la comunicación con agentes Jenkins cuando sea necesaria. |
-| Volumen `jenkins_home` | Conserva configuración, usuarios y datos del controlador entre reinicios. |
+| Volumen `jenkins_home` | Conserva configuración, usuario y datos del controlador entre reinicios. |
 | Socket Docker | Permite al pipeline administrar el ambiente Compose del host. |
 | Plugins Git, GitHub, Pipeline y Docker Pipeline | Soportan control de código, ejecución del pipeline y automatización Docker. |
 
@@ -66,7 +68,7 @@ El archivo `.travis.yml` replica la lógica esencial del flujo para la rama `mai
 
 ## 6. Trazabilidad y control de cambios
 
-El repositorio conserva los artefactos que permiten revisar la evolución del proyecto: Dockerfiles, archivos Compose, `Jenkinsfile`, `.travis.yml` y documentos finales. Cada cambio debe acompañarse de un commit descriptivo, por ejemplo: `ci: agregar configuracion Travis CI` o `docs: consolidar entrega final`.
+El repositorio conserva los artefactos que permiten revisar la evolución del proyecto: Dockerfiles, archivos Compose, `Jenkinsfile`, `.travis.yml` y documentos finales. Cada cambio se acompaña de un commit descriptivo, por ejemplo: `ci: agregar configuracion Travis CI` o `docs: consolidar entrega final`.
 
 Para una revisión completa, la sustentación debe mostrar el historial de commits, los archivos de automatización y, cuando exista, una rama o pull request asociado a cambios relevantes.
 
@@ -82,7 +84,7 @@ La entrega debe incluir evidencia real y legible de los siguientes elementos:
 6. Consola de ejecución del pipeline.
 7. Archivo `.travis.yml` y repositorio activado en Travis CI.
 8. Resultado del build de Travis CI.
-9. Historial de commits, responsables y decisiones del equipo.
+9. Historial de commits, decisiones técnicas y reflexión individual.
 
 Cada figura debe incluir número, título, explicación breve y la fuente **Elaboración propia**.
 
@@ -96,7 +98,7 @@ La guía del módulo solicita mencionar CodeShip dentro del entorno integrado. S
 - Docker Compose ofrece un ambiente reproducible para ejecutar servicios aislados y comunicados.
 - Jenkins permite automatizar validaciones locales mediante un pipeline versionado.
 - Travis CI extiende la validación al flujo remoto asociado a cambios en el repositorio.
-- La evidencia debe diferenciar claramente entre configuración implementada y ejecución comprobada, evitando declarar resultados sin una consola o dashboard verificable.
+- La evidencia diferencia claramente entre configuración implementada y ejecución comprobada, evitando declarar resultados sin una consola o dashboard verificable.
 
 ## Referencias
 
