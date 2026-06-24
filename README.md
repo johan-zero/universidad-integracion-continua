@@ -1,52 +1,74 @@
-# Universidad - Integracion Continua
+# Integración Continua — Proyecto Final
 
-Repositorio academico del modulo **Enfasis Profesional I - Integracion Continua**.
+Repositorio académico público para el módulo **Énfasis Profesional I — Integración Continua**.
 
-> **Control de alcance:** este repositorio corresponde exclusivamente a la materia de Integracion Continua. El contenido, la documentacion y las evidencias estan orientados a GitHub, Docker, Jenkins y comunicacion entre herramientas del flujo CI.
+El proyecto consolida una solución incremental basada en **GitHub, Docker, Jenkins y Travis CI**. Su finalidad es demostrar control de cambios, construcción reproducible de servicios, validación de comunicación entre contenedores y automatización del flujo de integración continua.
 
-## Descripcion del proyecto
+> **Alcance verificado:** este repositorio contiene la configuración y documentación del proyecto. Las ejecuciones de Jenkins, Travis CI o CodeShip solo deben presentarse como exitosas cuando exista evidencia visible en su consola o dashboard.
 
-El proyecto se desarrolla por entregas incrementales. La Entrega 1 incorporo GitHub y Docker para crear dos contenedores comunicados entre si. La Entrega 2 incorpora Jenkins como gestor de operaciones para automatizar la validacion del ambiente Docker.
+## Arquitectura integrada
 
-## Componentes implementados
+```mermaid
+flowchart LR
+    A[GitHub
+Repositorio y trazabilidad] --> B[Jenkins
+Pipeline local]
+    A --> C[Travis CI
+Build remoto]
+    B --> D[Docker Compose]
+    C --> D
+    D --> E[servidor-web
+Nginx]
+    D --> F[cliente-pruebas
+Ping y HTTP]
+    E <--> F
+```
 
-| Entrega | Herramienta principal | Resultado tecnico |
+## Entregas consolidadas
+
+| Entrega | Componente incorporado | Evidencia disponible |
 |---|---|---|
-| Entrega 1 | GitHub + Docker | Repositorio, dos contenedores y red Docker compartida. |
-| Entrega 2 | Jenkins | Pipeline para construir contenedores y validar comunicacion. |
+| Entrega 1 | GitHub + Docker | Servicios `servidor-web` y `cliente-pruebas`, red Docker y script de comunicación. |
+| Entrega 2 | Jenkins | `Jenkinsfile`, imagen Jenkins con Docker CLI, plugins y compose dedicado. |
+| Entrega final | Travis CI + sustentación | `.travis.yml`, documentación final, matriz de evidencias y guion de sustentación. |
 
-## Estructura del repositorio
+## Estructura principal
 
 ```text
 .
 ├── README.md
 ├── Jenkinsfile
+├── .travis.yml
 ├── docker-compose.yml
 ├── docker-compose.jenkins.yml
-├── .gitignore
+├── jenkins/
+│   ├── Dockerfile
+│   └── plugins.txt
 ├── servidor-web/
-│   ├── Dockerfile
-│   ├── .dockerignore
-│   └── index.html
 ├── cliente-pruebas/
-│   ├── Dockerfile
-│   ├── .dockerignore
-│   └── validar_comunicacion.sh
 ├── docs/
-│   ├── informe-entrega-1.md
-│   ├── comandos-validacion.md
-│   ├── bitacora-trabajo.md
-│   ├── evidencias/
-│   │   └── README.md
-│   └── entrega-2/
-│       ├── README.md
-│       └── guia-instalacion-jenkins.md
-└── .github/
-    └── workflows/
-        └── docker-validacion.yml
+│   ├── entrega-2/
+│   └── final/
+│       ├── entrega-final.md
+│       ├── instructivo-ejecucion-sustentacion.md
+│       ├── matriz-evidencias.md
+│       ├── guion-sustentacion.md
+│       ├── roles-y-trazabilidad.md
+│       └── codeship-estado.md
+└── .github/workflows/
 ```
 
-## Ejecucion Entrega 1 - Docker
+## Requisitos de ejecución
+
+- Docker Desktop con contenedores Linux habilitados.
+- Git.
+- Navegador web.
+- Para Jenkins: al menos 4 GB de RAM disponibles y 50 GB de almacenamiento recomendados para entornos pequeños, además de Java 21 incorporado en la imagen configurada.
+- Cuenta de GitHub y, para evidencia remota, cuenta de Travis CI vinculada al repositorio.
+
+## Ejecución local: Docker
+
+Desde la raíz del repositorio:
 
 ```bash
 docker compose build
@@ -61,28 +83,62 @@ El servicio web queda disponible en:
 http://localhost:8080
 ```
 
-## Ejecucion Entrega 2 - Jenkins
+Para detener el ambiente:
 
-Primero iniciar el ambiente base de Docker:
+```bash
+docker compose down
+```
+
+## Ejecución local: Jenkins
+
+Primero crear la red y levantar los servicios base:
 
 ```bash
 docker compose up -d
 ```
 
-Luego iniciar Jenkins:
+Luego construir e iniciar Jenkins:
 
 ```bash
-docker compose -f docker-compose.jenkins.yml up -d
+docker compose -f docker-compose.jenkins.yml up -d --build
 ```
 
-Jenkins queda disponible en:
+Consultar la contraseña inicial:
+
+```bash
+docker exec entrega2-jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+```
+
+Abrir Jenkins:
 
 ```text
 http://localhost:9090
 ```
 
-El pipeline se define en el archivo `Jenkinsfile` y ejecuta las etapas de validacion del repositorio, construccion de contenedores, inicio del ambiente y validacion de comunicacion.
+En Jenkins, crear una tarea de tipo **Pipeline from SCM**, seleccionar este repositorio, rama `main` y archivo `Jenkinsfile`.
 
-## Resultado esperado
+## Travis CI
 
-La Entrega 2 debe demostrar que Jenkins puede ejecutar un flujo basico de integracion continua sobre el proyecto ya construido en la Entrega 1, conservando el caracter incremental del modulo.
+El archivo `.travis.yml` define la construcción de imágenes, el inicio de los servicios y la validación de comunicación. Para obtener evidencia real:
+
+1. Ingresar a Travis CI con GitHub.
+2. Autorizar el acceso al repositorio público.
+3. Activar `johan-zero/universidad-integracion-continua`.
+4. Hacer un commit en `main` o ejecutar un build manual si la plataforma lo permite.
+5. Capturar el resultado del build y los logs.
+
+## Documentación final
+
+- [Documento final](docs/final/entrega-final.md)
+- [Instructivo de ejecución y sustentación](docs/final/instructivo-ejecucion-sustentacion.md)
+- [Matriz de evidencias](docs/final/matriz-evidencias.md)
+- [Guion de sustentación](docs/final/guion-sustentacion.md)
+- [Roles y trazabilidad](docs/final/roles-y-trazabilidad.md)
+- [Estado de CodeShip](docs/final/codeship-estado.md)
+
+## Referencias técnicas
+
+- [Documentación de Docker Compose](https://docs.docker.com/compose/)
+- [Instalación de Jenkins con Docker](https://www.jenkins.io/doc/book/installing/docker/)
+- [Pipelines definidos mediante Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/)
+- [Documentación de Travis CI](https://docs.travis-ci.com/)
