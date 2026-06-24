@@ -1,52 +1,31 @@
-# Entrega final - Integracion Continua
+# Entrega final — Integración Continua
 
-## Objetivo de la sustentacion
+Esta carpeta concentra los artefactos de soporte para el documento final y la sustentación en vivo.
 
-La entrega final consolida el proyecto desarrollado durante el modulo. Debe demostrar, mediante un video de sustentacion y un documento de soporte, la integracion progresiva de GitHub, Docker, Jenkins y Travis CI, junto con el historial de cambios, las decisiones tecnicas, los hallazgos y las responsabilidades del equipo.
+## Documentos principales
 
-## Estado de la solucion
+| Documento | Propósito |
+|---|---|
+| [entrega-final.md](entrega-final.md) | Informe técnico consolidado del proyecto. |
+| [instructivo-ejecucion-sustentacion.md](instructivo-ejecucion-sustentacion.md) | Guía operativa para ejecutar y presentar la solución. |
+| [matriz-evidencias.md](matriz-evidencias.md) | Control de evidencias obligatorias y responsables. |
+| [guion-sustentacion.md](guion-sustentacion.md) | Distribución sugerida del video de 5 a 6 minutos. |
+| [roles-y-trazabilidad.md](roles-y-trazabilidad.md) | Roles, decisiones técnicas, incidencias y aportes del equipo. |
+| [codeship-estado.md](codeship-estado.md) | Criterio de veracidad y tratamiento de CodeShip. |
+| [evidencias/README.md](evidencias/README.md) | Nombres y criterio de calidad de las capturas reales. |
 
-| Componente | Evidencia en repositorio | Estado verificable |
+## Estado de la solución
+
+| Componente | Estado en repositorio | Evidencia de ejecución requerida |
 |---|---|---|
-| GitHub | Repositorio, commits, README y documentacion | Disponible |
-| Docker | `docker-compose.yml`, Dockerfiles y script de validacion | Disponible |
-| Jenkins | `docker-compose.jenkins.yml` y `Jenkinsfile` | Disponible; requiere ejecucion local para evidencia runtime |
-| Travis CI | `.travis.yml` | Configuracion versionada; requiere activacion en Travis para evidencia runtime |
-| CodeShip | Ver nota de disponibilidad | Sin evidencia de ejecucion; no debe presentarse como integrado hasta contar con acceso operativo |
+| GitHub | Repositorio público, documentación y commits. | Mostrar repositorio e historial de cambios. |
+| Docker | Servicios, red y script de comunicación versionados. | Mostrar `docker compose ps` y validación. |
+| Jenkins | Imagen, plugins, compose y pipeline versionados. | Mostrar dashboard, tarea y consola. |
+| Travis CI | `.travis.yml` versionado. | Activar repositorio y mostrar build/logs. |
+| CodeShip | Estado de disponibilidad documentado. | Solo mostrar si existe ejecución verificable. |
 
-## Correcciones aplicadas a partir de la segunda entrega
+## Regla de presentación
 
-La retroalimentacion recibida se incorporara explicitamente en la sustentacion y en el documento final:
+Cada captura incluida en el informe debe indicar qué herramienta se muestra, qué acción se ejecutó y qué resultado se obtuvo. Debe llevar número de figura, título, explicación breve y la fuente **Elaboración propia**.
 
-1. Se detallan requisitos de Jenkins desde infraestructura, software, dependencias, plugins y seguridad.
-2. Se conserva una implementacion concreta de Jenkins mediante contenedor y pipeline versionado.
-3. Cada figura o captura debe llevar titulo, explicacion y fuente.
-4. El documento se presenta con portada, estructura numerada, redaccion revisada y referencias en formato APA.
-
-## Estructura recomendada del documento final
-
-1. Portada.
-2. Resumen ejecutivo.
-3. Objetivo y alcance.
-4. Arquitectura integrada de la solucion.
-5. Requisitos de Jenkins y justificacion de la implementacion.
-6. Integracion GitHub, Docker, Jenkins y Travis CI.
-7. Trazabilidad: historial de cambios, incidencias y decisiones.
-8. Responsabilidades y aportes del equipo.
-9. Evidencias de ejecucion.
-10. Conclusiones y recomendaciones.
-11. Referencias.
-
-## Evidencia minima para el video
-
-1. Repositorio GitHub y estructura del proyecto.
-2. Contenedores Docker activos y prueba de comunicacion.
-3. Jenkins instalado, tarea Pipeline creada y consola de ejecucion.
-4. Archivo `.travis.yml` y activacion del repositorio en Travis CI.
-5. Build de Travis con resultado visible.
-6. Historial de commits, rama o pull request.
-7. Participacion de todos los integrantes.
-
-## Restriccion de veracidad
-
-Solo deben incluirse como resultados aquellos que puedan mostrarse en pantalla. La configuracion versionada puede presentarse como implementada; una ejecucion de Jenkins, Travis o CodeShip solo puede describirse como exitosa si existe evidencia visible de la consola o plataforma correspondiente.
+No se deben presentar como éxitos las ejecuciones de Jenkins, Travis CI o CodeShip que no tengan evidencia visible en consola o dashboard.
