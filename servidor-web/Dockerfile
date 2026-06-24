@@ -1,7 +1,7 @@
 FROM nginx:1.27-alpine
 
-LABEL maintainer="Grupo Integración Continua"
-LABEL description="Servidor web simple para validar comunicación entre contenedores Docker"
+LABEL maintainer="Johan Sebastian Rodriguez"
+LABEL description="Servidor web del proyecto final para validar comunicacion entre contenedores Docker"
 
 COPY index.html /usr/share/nginx/html/index.html
 
