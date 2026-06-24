@@ -1,6 +1,8 @@
 # Entrega final — Integración Continua
 
-Esta carpeta concentra los artefactos de soporte para el documento final y la sustentación en vivo.
+**Estudiante responsable:** Johan Sebastian Rodríguez
+
+Esta carpeta concentra los artefactos de soporte para el documento final y la sustentación individual en vivo.
 
 ## Documentos principales
 
@@ -8,9 +10,9 @@ Esta carpeta concentra los artefactos de soporte para el documento final y la su
 |---|---|
 | [entrega-final.md](entrega-final.md) | Informe técnico consolidado del proyecto. |
 | [instructivo-ejecucion-sustentacion.md](instructivo-ejecucion-sustentacion.md) | Guía operativa para ejecutar y presentar la solución. |
-| [matriz-evidencias.md](matriz-evidencias.md) | Control de evidencias obligatorias y responsables. |
-| [guion-sustentacion.md](guion-sustentacion.md) | Distribución sugerida del video de 5 a 6 minutos. |
-| [roles-y-trazabilidad.md](roles-y-trazabilidad.md) | Roles, decisiones técnicas, incidencias y aportes del equipo. |
+| [matriz-evidencias.md](matriz-evidencias.md) | Control de evidencias obligatorias y responsable individual. |
+| [guion-sustentacion.md](guion-sustentacion.md) | Secuencia sugerida del video individual de 5 a 6 minutos. |
+| [roles-y-trazabilidad.md](roles-y-trazabilidad.md) | Responsabilidad individual, decisiones técnicas, incidencias y trazabilidad. |
 | [codeship-estado.md](codeship-estado.md) | Criterio de veracidad y tratamiento de CodeShip. |
 | [evidencias/README.md](evidencias/README.md) | Nombres y criterio de calidad de las capturas reales. |
 
