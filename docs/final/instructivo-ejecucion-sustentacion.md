@@ -1,6 +1,7 @@
-# Instructivo de ejecución y sustentación en vivo
+# Instructivo de ejecución y sustentación individual
 
-Este instructivo permite ejecutar el proyecto, recopilar evidencia real y realizar una sustentación de 5 a 6 minutos.
+**Estudiante responsable:** Johan Sebastian Rodríguez  
+Este instructivo permite ejecutar el proyecto, recopilar evidencia real y realizar una sustentación individual de 5 a 6 minutos.
 
 ## 1. Preparación
 
@@ -100,21 +101,21 @@ Capturar:
 
 Solo mostrar CodeShip si se cuenta con acceso operativo, repositorio vinculado y build visible. De lo contrario, explicar que se documentó la revisión de disponibilidad y que no se presenta una ejecución no verificable. Consultar [estado de CodeShip](codeship-estado.md).
 
-## 6. Secuencia de sustentación
+## 6. Secuencia de sustentación individual
 
 | Tiempo | Responsable | Evidencia y mensaje clave |
 |---|---|---|
-| 0:00–0:35 | Integrante 1 | Presentar el objetivo y el repositorio público. |
-| 0:35–1:15 | Integrante 1 | Mostrar GitHub, README, commits y trazabilidad. |
-| 1:15–2:05 | Integrante 2 | Mostrar Docker Compose, servicios activos y comunicación. |
-| 2:05–3:05 | Integrante 3 | Mostrar requisitos, Jenkins y el pipeline. |
-| 3:05–4:05 | Integrante 4 | Mostrar `.travis.yml`, Travis CI y el build. |
-| 4:05–4:45 | Integrante 4 | Presentar incidencias, decisiones y control de cambios. |
-| 4:45–5:30 | Integrante 5 | Presentar conclusiones y recomendaciones. |
+| 0:00–0:35 | Johan Sebastian Rodríguez | Presentar el objetivo y el repositorio público. |
+| 0:35–1:15 | Johan Sebastian Rodríguez | Mostrar GitHub, README, commits y trazabilidad. |
+| 1:15–2:05 | Johan Sebastian Rodríguez | Mostrar Docker Compose, servicios activos y comunicación. |
+| 2:05–3:05 | Johan Sebastian Rodríguez | Mostrar requisitos, Jenkins y el pipeline. |
+| 3:05–4:05 | Johan Sebastian Rodríguez | Mostrar `.travis.yml`, Travis CI y el build. |
+| 4:05–4:45 | Johan Sebastian Rodríguez | Presentar incidencias, decisiones y control de cambios. |
+| 4:45–5:30 | Johan Sebastian Rodríguez | Presentar conclusiones y recomendaciones. |
 
 ## 7. Mensajes técnicos sugeridos
 
-**GitHub:** “GitHub concentra el código, la documentación y la trazabilidad; los commits permiten identificar cambios y responsables.”
+**GitHub:** “GitHub concentra el código, la documentación y la trazabilidad; los commits permiten identificar los cambios realizados y su propósito.”
 
 **Docker:** “Docker Compose define dos servicios aislados conectados por una red interna. El cliente valida resolución de nombre y respuesta HTTP del servidor.”
 
